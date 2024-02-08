@@ -1,12 +1,7 @@
 <template>
-  <v-sheet class="ma-2 pa-2">
-    <v-card class="product">
-      <v-img
-        v-if="isVisible"
-        :src="props.productData.images[0]"
-        height="200px"
-        cover
-      />
+  <v-sheet class="ma-1 pa-1">
+    <v-card class="product" @click="goToProductPage">
+      <v-img :src="props.productData.images[0]" height="250px" cover />
 
       <v-card-title>
         {{ props.productData.brand }}
@@ -19,8 +14,12 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn @click="goToProductPage(props.productData.id)">
-          Add to cart
+        <v-btn
+          @click="goToProductPage(props.productData.id)"
+          elevation="4"
+          class="bg-teal-lighten-2"
+        >
+          + to Cart
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -29,6 +28,7 @@
 
 <script>
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 export default defineComponent({
   name: "ProductItem",
 });
@@ -41,15 +41,26 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  isVisible: {
-    type: Boolean,
-    default: true,
-  },
 });
 
+const router = useRouter();
 const emit = defineEmits(["item-clicked"]);
 
 const goToProductPage = (productId) => {
-  emit("item-clicked", productId);
+  router.push({ name: "ProductDetails", params: { id: productId } });
 };
 </script>
+<style>
+.product {
+  min-height: 500px;
+  cursor: pointer;
+}
+.product:hover {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.add-to-cart {
+  border: 2px solid black;
+}
+</style>

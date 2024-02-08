@@ -1,7 +1,15 @@
 <template>
-  <button @click="router.push({ name: 'Catalog' })">Back to catalog</button>
+  <v-btn
+    @click="router.push({ name: 'Catalog' })"
+    color="teal-lighten-4"
+    variant="elevated"
+  >
+    Back to catalog
+  </v-btn>
   <div v-if="!store.cart.length" style="text-align: center">
-    <h1>Empty Cart ...</h1>
+    <button @click="router.push({ name: 'Catalog' })" class="shopping">
+      Click here to start shopping
+    </button>
   </div>
   <div class="cart-items" v-else>
     <div class="cart-item" v-for="item in store.cart" :key="item.id">
@@ -10,7 +18,9 @@
         <span>Brand: {{ item.brand }}</span>
         <span>Category: {{ item.category }}</span>
         <span>Price: ${{ item.price }}</span>
-        <button @click="removeFromCart(item.id)">Remove</button>
+        <button @click="removeFromCart(item.id)" class="remove-cart">
+          Remove
+        </button>
       </div>
     </div>
   </div>
@@ -49,5 +59,27 @@ const removeFromCart = (id) => {
 
 .item-details img {
   width: 20%;
+}
+
+.remove-cart {
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 10px;
+  background-color: cadetblue;
+  color: white;
+  font-weight: bold;
+}
+
+.shopping {
+  width: 100%;
+  height: 120px;
+  background-color: #ffc107;
+  margin-top: 50px;
+  border-radius: 20px;
+  font-size: xx-large;
+  color: rgb(64, 163, 250);
+  font-weight: bold;
 }
 </style>
