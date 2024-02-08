@@ -8,7 +8,7 @@
   </v-btn>
   <div v-if="!store.cart.length" style="text-align: center">
     <button @click="router.push({ name: 'Catalog' })" class="shopping">
-      Click here to start shopping
+      Click here to back!
     </button>
   </div>
   <div class="cart-items" v-else>
@@ -75,7 +75,7 @@ const removeFromCart = (id) => {
 .shopping {
   width: 100%;
   height: 120px;
-  background-color: #ffc107;
+  background-color: primary;
   margin-top: 50px;
   border-radius: 20px;
   font-size: xx-large;
