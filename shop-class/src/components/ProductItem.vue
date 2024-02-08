@@ -14,11 +14,7 @@
       </v-card-text>
 
       <v-card-actions>
-        <v-btn
-          @click="goToProductPage(props.productData.id)"
-          elevation="4"
-          class="bg-teal-lighten-2"
-        >
+        <v-btn @click="addToCart" elevation="4" class="bg-teal-lighten-2">
           + to Cart
         </v-btn>
       </v-card-actions>
@@ -48,6 +44,10 @@ const emit = defineEmits(["item-clicked"]);
 
 const goToProductPage = (productId) => {
   router.push({ name: "ProductDetails", params: { id: productId } });
+};
+const addToCart = () => {
+  store.addToCart(selectedProduct.value);
+  router.push({ name: "CartView" });
 };
 </script>
 <style>
